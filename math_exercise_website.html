@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แบบฝึกหัดคณิตศาสตร์ ป.1 - บทที่ 16 แผนภูมิรูปภาพ</title>
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: #f5f7ff;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        header {
+            background-color: #3f51b5;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .section {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .exercise {
+            margin-bottom: 30px;
+        }
+        .chart-container {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        .picture-chart {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .chart-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .chart-label {
+            width: 100px;
+            text-align: right;
+            padding-right: 10px;
+            font-weight: bold;
+        }
+        .chart-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .fruit-icon {
+            font-size: 24px;
+            margin-right: 2px;
+        }
+        .answer-box {
+            border: 2px dashed #3f51b5;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 8px;
+        }
+        button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #388e3c;
+        }
+        input[type="number"] {
+            width: 60px;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+            display: none;
+        }
+        .correct {
+            color: #4caf50;
+        }
+        .incorrect {
+            color: #f44336;
+        }
+        .answer-reveal {
+            display: none;
+            margin-top: 10px;
+            color: #f44336;
+            font-weight: bold;
+        }
+        .tab-buttons {
+            display: flex;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+        .tab-btn {
+            background-color: #ddd;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 5px 5px 0 0;
+            flex-grow: 1;
+        }
+        .tab-btn.active {
+            background-color: #3f51b5;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .stars-container {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 24px;
+            color: #ffc107;
+            height: 40px;
+        }
+        .answer-indicator {
+            margin-left: 10px;
+            font-size: 22px;
+        }
+        .answer-correct {
+            color: #4caf50;
+        }
+        .answer-incorrect {
+            color: #f44336;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>ติวเข้มคณิตศาสตร์ ป.1 - บทที่ 16 แผนภูมิรูปภาพ</h1>
+        </header>
+
+        <div class="tab-buttons">
+            <button class="tab-btn active" onclick="openTab('lesson')">เรียนรู้</button>
+            <button class="tab-btn" onclick="openTab('exercise')">แบบฝึกหัด</button>
+            <button class="tab-btn" onclick="openTab('game')">เกม</button>
+        </div>
+
+        <div id="lesson" class="tab-content active">
+            <div class="section">
+                <h2>แผนภูมิรูปภาพคืออะไร?</h2>
+                <p>แผนภูมิรูปภาพเป็นวิธีการนำเสนอข้อมูลโดยใช้รูปภาพแทนจำนวน รูปภาพ 1 รูปแทนจำนวน 1 หน่วย</p>
+                
+                <div class="chart-container">
+                    <h3>ตัวอย่างแผนภูมิรูปภาพ: ผลไม้ที่นักเรียนชอบ</h3>
+                    <div class="picture-chart">
+                        <div class="chart-row">
+                            <div class="chart-label">ส้ม</div>
+                            <div class="chart-bar">
+                                <span class="fruit-icon">🍊</span>
+                                <span class="fruit-icon">🍊</span>
+                                <span class="fruit-icon">🍊</span>
+                                <span class="fruit-icon">🍊</span>
+                                <span class="fruit-icon">🍊</span>
+                            </div>
+                        </div>
+                        <div class="chart-row">
+                            <div class="chart-label">แอปเปิ้ล</div>
+                            <div class="chart-bar">
+                                <span class="fruit-icon">🍎</span>
+                                <span class="fruit-icon">🍎</span>
+                                <span class="fruit-icon">🍎</span>
+                            </div>
+                        </div>
+                        <div class="chart-row">
+                            <div class="chart-label">กล้วย</div>
+                            <div class="chart-bar">
+                                <span class="fruit-icon">🍌</span>
+                                <span class="fruit-icon">🍌</span>
+                                <span class="fruit-icon">🍌</span>
+                                <span class="fruit-icon">🍌</span>
+                            </div>
+                        </div>
+                        <div class="chart-row">
+                            <div class="chart-label">องุ่น</div>
+                            <div class="chart-bar">
+                                <span class="fruit-icon">🍇</span>
+                                <span class="fruit-icon">🍇</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>การอ่านแผนภูมิรูปภาพ:</h3>
+                <ul>
+                    <li>นับจำนวนรูปในแต่ละหมวดหมู่</li>
+                    <li>เปรียบเทียบจำนวนระหว่างหมวดหมู่ว่ามากกว่า น้อยกว่า หรือเท่ากัน</li>
+                    <li>ตอบคำถามเกี่ยวกับข้อมูลในแผนภูมิ</li>
+                </ul>
+
+                <h3>จากแผนภูมิข้างต้น เราสามารถตอบคำถามได้:</h3>
+                <ul>
+                    <li>นักเรียนชอบส้มมากที่สุด (5 คน)</li>
+                    <li>นักเรียนชอบองุ่นน้อยที่สุด (2 คน)</li>
+                    <li>นักเรียนชอบกล้วยมากกว่าแอปเปิ้ล 1 คน</li>
+                    <li>มีนักเรียนที่ชอบผลไม้ทั้งหมด 5 + 3 + 4 + 2 = 14 คน</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="exercise" class="tab-content">
+            <div class="section">
+                <div class="exercise">
+                    <h3>แบบฝึกหัดที่ 1: นับจำนวนจากแผนภูมิรูปภาพ</h3>
+                    <p>ดูแผนภูมิรูปภาพสัตว์เลี้ยงที่เด็กๆ ชอบด้านล่าง แล้วตอบคำถาม</p>
+                    
+                    <div class="chart-container">
+                        <div class="picture-chart">
+                            <div class="chart-row">
+                                <div class="chart-label">สุนัข</div>
+                                <div class="chart-bar">
+                                    <span class="fruit-icon">🐶</span>
+                                    <span class="fruit-icon">🐶</span>
+                                    <span class="fruit-icon">🐶</span>
+                                    <span class="fruit-icon">🐶</span>
+                                    <span class="fruit-icon">🐶</span>
+                                    <span class="fruit-icon">🐶</span>
+                                </div>
+                            </div>
+                            <div class="chart-row">
+                                <div class="chart-label">แมว</div>
+                                <div class="chart-bar">
+                                    <span class="fruit-icon">🐱</span>
+                                    <span class="fruit-icon">🐱</span>
+                                    <span class="fruit-icon">🐱</span>
+                                    <span class="fruit-icon">🐱</span>
+                                </div>
+                            </div>
+                            <div class="chart-row">
+                                <div class="chart-label">นก</div>
+                                <div class="chart-bar">
+                                    <span class="fruit-icon">🐦</span>
+                                    <span class="fruit-icon">🐦</span>
+                                    <span class="fruit-icon">🐦</span>
+                                </div>
+                            </div>
+                            <div class="chart-row">
+                                <div class="chart-label">ปลา</div>
+                                <div class="chart-bar">
+                                    <span class="fruit-icon">🐠</span>
+                                    <span class="fruit-icon">🐠</span>
+                                    <span class="fruit-icon">🐠</span>
+                                    <span class="fruit-icon">🐠</span>
+                                    <span class="fruit-icon">🐠</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="answer-box">
+                        <p>1. มีเด็กที่ชอบสุนัขกี่คน? <input type="number" id="q1-1"> คน
+                        <button onclick="checkAnswer('q1-1', 6)">ตรวจคำตอบ</button>
+                        <div id="feedback-q1-1" class="feedback"></div>
+                        <div id="answer-q1-1" class="answer-reveal">คำตอบคือ: 6 คน</div></p>
+                        
+                        <p>2. มีเด็กที่ชอบแมวกี่คน? <input type="number" id="q1-2"> คน
+                        <button onclick="checkAnswer('q1-2', 4)">ตรวจคำตอบ</button>
+                        <div id="feedback-q1-2" class="feedback"></div>
+                        <div id="answer-q1-2" class="answer-reveal">คำตอบคือ: 4 คน</div></p>
+                        
+                        <p>3. สัตว์เลี้ยงชนิดใดที่มีเด็กชอบน้อยที่สุด? 
+                        <select id="q1-3">
+                            <option value="">เลือกคำตอบ</option>
+                            <option value="dog">สุนัข</option>
+                            <option value="cat">แมว</option>
+                            <option value="bird">นก</option>
+                            <option value="fish">ปลา</option>
+                        </select>
+                        <button onclick="checkAnswer('q1-3', 'bird')">ตรวจคำตอบ</button>
+                        <div id="feedback-q1-3" class="feedback"></div>
+                        <div id="answer-q1-3" class="answer-reveal">คำตอบคือ: นก (3 คน)</div></p>
+                        
+                        <p>4. มีเด็กที่ชอบสัตว์เลี้ยงทั้งหมดกี่คน? <input type="number" id="q1-4"> คน
+                        <button onclick="checkAnswer('q1-4', 18)">ตรวจคำตอบ</button>
+                        <div id="feedback-q1-4" class="feedback"></div>
+                        <div id="answer-q1-4" class="answer-reveal">คำตอบคือ: 18 คน (6 + 4 + 3 + 5 = 18)</div></p>
+                    </div>
+                </div>
+
+                <div class="exercise">
+                    <h3>แบบฝึกหัดที่ 2: สร้างแผนภูมิรูปภาพ</h3>
+                    <p>จำนวนดินสอสีที่เด็กๆ มี:</p>
+                    <ul>
+                        <li>แดง: 3 แท่ง</li>
+                        <li>เขียว: 5 แท่ง</li>
+                        <li>น้ำเงิน: 2 แท่ง</li>
+                        <li>เหลือง: 4 แท่ง</li>
+                    </ul>
+                    
+                    <p>วาดแผนภูมิรูปภาพโดยเติมจำนวนสัญลักษณ์ดินสอตามสีให้ถูกต้อง:</p>
+                    <div class="chart-container">
+                        <div class="picture-chart">
+                            <div class="chart-row">
+                                <div class="chart-label">แดง</div>
+                                <div class="chart-bar" id="red-pencils"></div>
+                            </div>
+                            <div class="chart-row">
+                                <div class="chart-label">เขียว</div>
+                                <div class="chart-bar" id="green-pencils"></div>
+                            </div>
+                            <div class="chart-row">
+                                <div class="chart-label">น้ำเงิน</div>
+                                <div class="chart-bar" id="blue-pencils"></div>
+                            </div>
+                            <div class="chart-row">
+                                <div class="chart-label">เหลือง</div>
+                                <div class="chart-bar" id="yellow-pencils"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p>เติมจำนวน:</p>
+                    <p>แดง: <input type="number" id="red-count" min="0" max="10" value="0"> <button onclick="updatePencils('red')">วาด</button></p>
+                    <p>เขียว: <input type="number" id="green-count" min="0" max="10" value="0"> <button onclick="updatePencils('green')">วาด</button></p>
+                    <p>น้ำเงิน: <input type="number" id="blue-count" min="0" max="10" value="0"> <button onclick="updatePencils('blue')">วาด</button></p>
+                    <p>เหลือง: <input type="number" id="yellow-count" min="0" max="10" value="0"> <button onclick="updatePencils('yellow')">วาด</button></p>
+                    
+                    <button onclick="checkPencilChart()">ตรวจคำตอบทั้งหมด</button>
+                    <div id="feedback-pencils" class="feedback"></div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="game" class="tab-content">
+            <div class="section">
+                <h2>เกมนักสำรวจแผนภูมิ</h2>
+                <p>ทายจำนวนจากแผนภูมิให้ถูกต้อง แล้วรับดาว!</p>
+                
+                <div class="chart-container">
+                    <h3>อาหารจานโปรดของเด็กๆ</h3>
+                    <div class="picture-chart">
+                        <div class="chart-row">
+                            <div class="chart-label">พิซซ่า</div>
+                            <div class="chart-bar" id="pizza-count"></div>
+                        </div>
+                        <div class="chart-row">
+                            <div class="chart-label">ก๋วยเตี๋ยว</div>
+                            <div class="chart-bar" id="noodle-count"></div>
+                        </div>
+                        <div class="chart-row">
+                            <div class="chart-label">ข้าวผัด</div>
+                            <div class="chart-bar" id="rice-count"></div>
+                        </div>
+                        <div class="chart-row">
+                            <div class="chart-label">ไก่ทอด</div>
+                            <div class="chart-bar" id="chicken-count"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="answer-box">
+                    <p>ตอบคำถาม:</p>
+                    <p>1. อาหารใดมีคนชอบมากที่สุด? 
+                    <select id="game-q1">
+                        <option value="">เลือกคำตอบ</option>
+                        <option value="pizza">พิซซ่า</option>
+                        <option value="noodle">ก๋วยเตี๋ยว</option>
+                        <option value="rice">ข้าวผัด</option>
+                        <option value="chicken">ไก่ทอด</option>
+                    </select>
+                    <span class="answer-indicator" id="indicator-q1"></span>
+                    </p>
+                    
+                    <p>2. มีคนชอบก๋วยเตี๋ยวกี่คน? <input type="number" id="game-q2" min="0">
+                    <span class="answer-indicator" id="indicator-q2"></span>
+                    </p>
+                    
+                    <p>3. อาหารใดมีคนชอบน้อยที่สุด? 
+                    <select id="game-q3">
+                        <option value="">เลือกคำตอบ</option>
+                        <option value="pizza">พิซซ่า</option>
+                        <option value="noodle">ก๋วยเตี๋ยว</option>
+                        <option value="rice">ข้าวผัด</option>
+                        <option value="chicken">ไก่ทอด</option>
+                    </select>
+                    <span class="answer-indicator" id="indicator-q3"></span>
+                    </p>
+                    
+                    <p>4. มีคนทั้งหมดกี่คนในการสำรวจนี้? <input type="number" id="game-q4" min="0">
+                    <span class="answer-indicator" id="indicator-q4"></span>
+                    </p>
+                    
+                    <button onclick="checkGame()">ส่งคำตอบ</button>
+                </div>
+                
+                <div class="stars-container" id="stars-display">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab navigation
+        function openTab(tabName) {
+            const tabContents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+            
+            const tabButtons = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+            
+            document.getElementById(tabName).classList.add("active");
+            event.currentTarget.classList.add("active");
+        }
+        
+        // Check answers for exercise 1
+        function checkAnswer(id, correctAnswer) {
+            const answerInput = document.getElementById(id);
+            const feedbackElement = document.getElementById("feedback-" + id);
+            const answerReveal = document.getElementById("answer-" + id);
+            
+            let userAnswer = answerInput.value;
+            if (id === "q1-3") {
+                if (userAnswer === correctAnswer) {
+                    feedbackElement.textContent = "ถูกต้อง! 👍";
+                    feedbackElement.className = "feedback correct";
+                } else {
+                    feedbackElement.textContent = "ลองใหม่อีกครั้ง";
+                    feedbackElement.className = "feedback incorrect";
+                    answerReveal.style.display = "block";
+                }
+            } else {
+                userAnswer = parseInt(userAnswer);
+                if (userAnswer === correctAnswer) {
+                    feedbackElement.textContent = "ถูกต้อง! 👍";
+                    feedbackElement.className = "feedback correct";
+                } else {
+                    feedbackElement.textContent = "ลองใหม่อีกครั้ง";
+                    feedbackElement.className = "feedback incorrect";
+                    answerReveal.style.display = "block";
+                }
+            }
+            
+            feedbackElement.style.display = "block";
+        }
+        
+        // Update pencil chart
+        function updatePencils(color) {
+            const count = parseInt(document.getElementById(color + "-count").value);
+            const container = document.getElementById(color + "-pencils");
+            container.innerHTML = "";
+            
+            let pencilEmoji = "📝";
+            
+            // เลือกสัญลักษณ์ตามสี
+            if (color === "red") {
+                pencilEmoji = "🔴";
+            } else if (color === "green") {
+                pencilEmoji = "🟢";
+            } else if (color === "blue") {
+                pencilEmoji = "🔵";
+            } else if (color === "yellow") {
+                pencilEmoji = "🟡";
+            }
+            
+            for (let i = 0; i < count; i++) {
+                const pencil = document.createElement("span");
+                pencil.className = "fruit-icon";
+                pencil.textContent = pencilEmoji;
+                container.appendChild(pencil);
+            }
+        }
+        
+        // Check pencil chart
+        function checkPencilChart() {
+            const redCount = parseInt(document.getElementById("red-count").value);
+            const greenCount = parseInt(document.getElementById("green-count").value);
+            const blueCount = parseInt(document.getElementById("blue-count").value);
+            const yellowCount = parseInt(document.getElementById("yellow-count").value);
+            
+            const feedbackElement = document.getElementById("feedback-pencils");
+            
+            if (redCount === 3 && greenCount === 5 && blueCount === 2 && yellowCount === 4) {
+                feedbackElement.textContent = "ยอดเยี่ยม! คุณสร้างแผนภูมิรูปภาพได้ถูกต้อง 👍";
+                feedbackElement.className = "feedback correct";
+            } else {
+                feedbackElement.textContent = "ยังไม่ถูกต้องทั้งหมด ลองตรวจสอบจำนวนอีกครั้ง";
+                feedbackElement.className = "feedback incorrect";
+            }
+            
+            feedbackElement.style.display = "block";
+        }
+        
+        // Game functions
+        let gameStarted = false;
+        let gameData = {};
+        
+        // Generate random data for game
+        function startGame() {
+            if (!gameStarted) {
+                gameData = {
+                    pizza: Math.floor(Math.random() * 5) + 2,
+                    noodle: Math.floor(Math.random() * 5) + 2,
+                    rice: Math.floor(Math.random() * 5) + 2,
+                    chicken: Math.floor(Math.random() * 5) + 2
+                };
+                
+                // Fill chart with icons
+                fillFoodChart("pizza", gameData.pizza, "🍕");
+                fillFoodChart("noodle", gameData.noodle, "🍜");
+                fillFoodChart("rice", gameData.rice, "🍚");
+                fillFoodChart("chicken", gameData.chicken, "🍗");
+                
+                gameStarted = true;
+                document.getElementById("stars-display").textContent = "";
+            }
+        }
+        
+        function fillFoodChart(food, count, emoji) {
+            const container = document.getElementById(food + "-count");
+            container.innerHTML = "";
+            
+            for (let i = 0; i < count; i++) {
+                const icon = document.createElement("span");
+                icon.className = "fruit-icon";
+                icon.textContent = emoji;
+                container.appendChild(icon);
+            }
+        }
+        
+        function checkGame() {
+            if (!gameStarted) {
+                startGame();
+                return;
+            }
+            
+            // Calculate correct answers
+            const mostPopular = Object.keys(gameData).reduce((a, b) => gameData[a] > gameData[b] ? a : b);
+            const leastPopular = Object.keys(gameData).reduce((a, b) => gameData[a] < gameData[b] ? a : b);
+            const totalPeople = gameData.pizza + gameData.noodle + gameData.rice + gameData.chicken;
+            
+            // Get user answers
+            const answer1 = document.getElementById("game-q1").value;
+            const answer2 = parseInt(document.getElementById("game-q2").value) || 0;
+            const answer3 = document.getElementById("game-q3").value;
+            const answer4 = parseInt(document.getElementById("game-q4").value) || 0;
+            
+            // Check answers and show stars immediately
+            let correctCount = 0;
+            let feedbackMessage = "ผลการตอบคำถาม:\n\n";
+            
+            // ตรวจคำตอบข้อ 1
+            const indicator1 = document.getElementById("indicator-q1");
+            if (answer1 === mostPopular) {
+                correctCount++;
+                indicator1.textContent = "⭐";
+                indicator1.className = "answer-indicator answer-correct";
+                feedbackMessage += "1. ✅ ถูกต้อง! อาหารที่มีคนชอบมากที่สุดคือ: " + translateFood(mostPopular) + " (" + gameData[mostPopular] + " คน)\n";
+            } else {
+                indicator1.textContent = "❌";
+                indicator1.className = "answer-indicator answer-incorrect";
+                feedbackMessage += "1. ❌ ไม่ถูกต้อง อาหารที่มีคนชอบมากที่สุดคือ: " + translateFood(mostPopular) + " (" + gameData[mostPopular] + " คน)\n";
+            }
+            
+            // ตรวจคำตอบข้อ 2
+            const indicator2 = document.getElementById("indicator-q2");
+            if (answer2 === gameData.noodle) {
+                correctCount++;
+                indicator2.textContent = "⭐";
+                indicator2.className = "answer-indicator answer-correct";
+                feedbackMessage += "2. ✅ ถูกต้อง! คนชอบก๋วยเตี๋ยว: " + gameData.noodle + " คน\n";
+            } else {
+                indicator2.textContent = "❌";
+                indicator2.className = "answer-indicator answer-incorrect";
+                feedbackMessage += "2. ❌ ไม่ถูกต้อง คนชอบก๋วยเตี๋ยว: " + gameData.noodle + " คน\n";
+            }
+            
+            // ตรวจคำตอบข้อ 3
+            const indicator3 = document.getElementById("indicator-q3");
+            if (answer3 === leastPopular) {
+                correctCount++;
+                indicator3.textContent = "⭐";
+                indicator3.className = "answer-indicator answer-correct";
+                feedbackMessage += "3. ✅ ถูกต้อง! อาหารที่มีคนชอบน้อยที่สุดคือ: " + translateFood(leastPopular) + " (" + gameData[leastPopular] + " คน)\n";
+            } else {
+                indicator3.textContent = "❌";
+                indicator3.className = "answer-indicator answer-incorrect";
+                feedbackMessage += "3. ❌ ไม่ถูกต้อง อาหารที่มีคนชอบน้อยที่สุดคือ: " + translateFood(leastPopular) + " (" + gameData[leastPopular] + " คน)\n";
+            }
+            
+            // ตรวจคำตอบข้อ 4
+            const indicator4 = document.getElementById("indicator-q4");
+            if (answer4 === totalPeople) {
+                correctCount++;
+                indicator4.textContent = "⭐";
+                indicator4.className = "answer-indicator answer-correct";
+                feedbackMessage += "4. ✅ ถูกต้อง! มีคนทั้งหมด: " + totalPeople + " คน";
+            } else {
+                indicator4.textContent = "❌";
+                indicator4.className = "answer-indicator answer-incorrect";
+                feedbackMessage += "4. ❌ ไม่ถูกต้อง มีคนทั้งหมด: " + totalPeople + " คน";
+            }
+            
+            // แสดงคะแนนรวมเป็นดาวที่ด้านล่าง
+            let stars = "";
+            for (let i = 0; i < correctCount; i++) {
+                stars += "⭐";
+            }
+            document.getElementById("stars-display").innerHTML = stars;
+            
+            // แสดงผลการตรวจ
+            setTimeout(() => {
+                alert(`คุณได้ ${correctCount} คะแนนจาก 4 คะแนน!\n\n${feedbackMessage}`);
+                
+                // Reset game for next round
+                setTimeout(() => {
+                    gameStarted = false;
+                    // รีเซ็ตตัวแสดงผลทั้งหมด
+                    document.getElementById("indicator-q1").textContent = "";
+                    document.getElementById("indicator-q2").textContent = "";
+                    document.getElementById("indicator-q3").textContent = "";
+                    document.getElementById("indicator-q4").textContent = "";
+                    
+                    // Start new game
+                    startGame();
+                }, 500);
+            }, 1000);
+        }
+        
+        function translateFood(food) {
+            const translations = {
+                pizza: "พิซซ่า",
+                noodle: "ก๋วยเตี๋ยว",
+                rice: "ข้าวผัด",
+                chicken: "ไก่ทอด"
+            };
+            return translations[food] || food;
+        }
+        
+        // Initialize the game when page loads
+        window.onload = function() {
+            startGame();
+        };
+    </script>
+</body>
+</html>
